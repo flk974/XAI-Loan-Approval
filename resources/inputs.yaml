@@ -1,0 +1,158 @@
+Personal Information:
+  emp_length:
+    type: int64
+    input_type: number
+    min: 0
+    max: 10
+    label: Employment Length
+    placeholder: How long have you been employed ?
+    helper_text: "0: Less than a year or not employed; 10: 10 years or more"
+
+  addr_state:
+    type: strings
+    input_type: select
+    label: Address State
+    options:
+      - value: AK
+        display: Alaska
+      - value: AL
+        display: Alabama
+      - value: AR
+        display: Arkansas
+      - value: AZ
+        display: Arizona
+      - value: CA
+        display: California
+      - value: CO
+        display: Colorado
+      - value: CT
+        display: Connecticut
+      - value: DC
+        display: District of Columbia
+      - value: DE
+        display: Delaware
+      - value: FL
+        display: Florida
+      - value: GA
+        display: Georgia
+      - value: HI
+        display: Hawaii
+      - value: IA
+        display: Iowa
+      - value: ID
+        display: Idaho
+      - value: IL
+        display: Illinois
+      - value: IN
+        display: Indiana
+      - value: KS
+        display: Kansas
+      - value: KY
+        display: Kentucky
+      - value: LA
+        display: Louisiana
+      - value: MA
+        display: Massachusetts
+      - value: MD
+        display: Maryland
+      - value: ME
+        display: Maine
+      - value: MI
+        display: Michigan
+      - value: MN
+        display: Minnesota
+      - value: MO
+        display: Missouri
+      - value: MS
+        display: Mississippi
+      - value: MT
+        display: Montana
+      - value: NC
+        display: North Carolina
+      - value: ND
+        display: North Dakota
+      - value: NE
+        display: Nebraska
+      - value: NH
+        display: New Hampshire
+      - value: NJ
+        display: New Jersey
+      - value: NM
+        display: New Mexico
+      - value: NV
+        display: Nevada
+      - value: NY
+        display: New York
+      - value: OH
+        display: Ohio
+      - value: OK
+        display: Oklahoma
+      - value: OR
+        display: Oregon
+      - value: PA
+        display: Pennsylvania
+      - value: RI
+        display: Rhode Island
+      - value: SC
+        display: South Carolina
+      - value: SD
+        display: South Dakota
+      - value: TN
+        display: Tennessee
+      - value: TX
+        display: Texas
+      - value: UT
+        display: Utah
+      - value: VA
+        display: Virginia
+      - value: VT
+        display: Vermont
+      - value: WA
+        display: Washington
+      - value: WI
+        display: Wisconsin
+      - value: WV
+        display: West Virginia
+      - value: WY
+        display: Wyoming
+    placeholder: Choose your state of residence
+
+Financial Background:
+  dti:
+    type: float64
+    input_type: number
+    min: 0.00
+    label: Debt to Income Ratio (DTI)
+    placeholder: Calculate DTI (Debt to Income ratio)
+    helper_text: DTI, or Debt to Income ratio, assesses your total monthly debt relative to your gross monthly income. It's a measure of your ability to manage monthly payments and repay debts. A lower DTI indicates a better financial health.
+
+Loan Information:
+  loan_amnt:
+    type: int64
+    input_type: number
+    min: 1000
+    max: 35000
+    label: Amount
+    placeholder: Amount of the loan
+    helper_text: We offer loans from $1000 to $35000
+
+  purpose:
+    type: string
+    input_type: select
+    label: Purpose
+    options:
+      - value: Auto
+        display: Auto
+      - value: Business
+        display: Business
+      - value: Education
+        display: Education
+      - value: Financial
+        display: Financial
+      - value: Home
+        display: Home
+      - value: Medical
+        display: Medical
+      - value: Other
+        display: Other
+    placeholder: Purpose of the loan

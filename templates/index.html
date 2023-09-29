@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lending Company</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Lending Application</h2>
+    <form action="/submit" method="post" id="main_form">
+        {% for section, features in features.items() %}
+            <fieldset>
+                <legend>{{ section }}</legend>
+                {% for feature_name, feature in features.items() %}
+                    <label for="{{ feature_name }}"> {{ feature.label }}
+                        {% set feature_helper_text = feature.helper_text %}
+                        {% if feature_helper_text %}
+                            <p class="helper-text">{{ feature_helper_text }}</p>
+                        {% endif %}
+                        {% set feature_type = feature.input_type %}
+                        {% if feature_type == "number" %}
+
+                            <input id={{ feature_name }} type="{{ feature_type }}" name="{{ feature_name }}"
+                                   placeholder="{{ feature.placeholder }}"
+                                   {% if feature.min %}min="{{ feature.min }}"{% endif %}
+                                   {% if feature.max %}max="{{ feature.max }}"{% endif %}
+                                   step="any"
+                                   required>
+
+                        {% elif feature_type == "select" %}
+                            <select id={{ feature_name }} name="{{ feature_name }}" required>
+                                <option value="" disabled selected>{{ feature.placeholder }}</option>
+                                {% for option in feature.options %}
+                                    <option value="{{ option.value }}">{{ option.display }}</option>
+                                {% endfor %}
+                            </select>
+                        {% endif %}
+                    </label>
+                {% endfor %}
+            </fieldset>
+        {% endfor %}
+
+        <button type="submit" form="main_form" value="Submit">Submit</button>
+    </form>
+    <div id="result_container"></div>
+</div>
+</body>
+{% include 'dtiModal.html' %}
+<script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</html>

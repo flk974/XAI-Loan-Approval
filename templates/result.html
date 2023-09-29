@@ -1,0 +1,11 @@
+<h2 id="loan_status" style="color:{% if loan_status == 'Accepted' %} {{ 'green' }} {% else %} {{ 'red' }} {% endif %}">Your loan has been {{ loan_status }}</h2>
+<h1>Local Interpretation</h1>
+<pre>{{ explanation|safe }}</pre>
+{% for plot_type, plot in plots %}
+    {% if plot_type == 'img' %}
+        <h1>Global Interpretation</h1>
+        <img src="{{ plot }}" alt="plot">
+    {% else %}
+        <iframe srcdoc="{{ plot }}"></iframe>
+    {% endif %}
+{% endfor %}
