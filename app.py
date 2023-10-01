@@ -9,7 +9,7 @@ app = Flask(__name__)
 resources_path = os.path.join(os.getcwd(), 'resources')
 
 explainer = get_explainer()
-summary_plot = get_summary_plot(explainer)
+summary_plot = get_summary_plot(explainer, True)
 
 
 @app.route('/')
