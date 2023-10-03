@@ -9,13 +9,13 @@ app = Flask(__name__)
 resources_path = os.path.join(os.getcwd(), 'resources')
 
 explainer = get_explainer()
-summary_plot = get_summary_plot(explainer, True)
+summary_plot = get_summary_plot(explainer)
 
 
 @app.route('/')
 def index():
+    # Load input features from a YAML file
     inputs_file = os.path.join(resources_path, 'inputs.yaml')
-
     with open(inputs_file, 'r') as f:
         features = yaml.safe_load(f)
 

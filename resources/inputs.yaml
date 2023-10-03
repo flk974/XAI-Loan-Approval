@@ -131,10 +131,10 @@ Loan Information:
     type: int64
     input_type: number
     min: 1000
-    max: 35000
+    max: 40000
     label: Amount
     placeholder: Amount of the loan
-    helper_text: We offer loans from $1000 to $35000
+    helper_text: We offer loans from $1,000 to $40,000
 
   purpose:
     type: string

@@ -26,25 +26,41 @@ states_cost_of_living = (
 
 
 def preprocess_data(data: dict) -> pd.DataFrame:
+    """
+    Preprocess a loan application instance by converting data to a DataFrame and convert the 'Address State'
+    to the state's cost-of-living.
+    """
     df_in = pd.DataFrame([data])
     features_order = X.columns
     return pd.merge(df_in, states_cost_of_living, on='addr_state').drop('addr_state', axis=1)[features_order]
 
 
-def predict(preprocessed_data) -> str:
+def predict(preprocessed_data: pd.DataFrame) -> str:
+    """
+    Predict the loan application result.
+    """
     return model.predict(preprocessed_data)
 
 
-def get_explainer():
+def get_explainer() -> shap.TreeExplainer:
+    """
+    Return the model explainer.
+    """
     return shap.TreeExplainer(model)
 
 
 def get_shap_values(explainer, instance_df, predict_df):
+    """
+    Return the shap values for a specific instance and its prediction.
+    """
     shap_values = explainer.shap_values(Pool(instance_df, predict_df, cat_features=cat_features))
     return shap_values
 
 
 def get_summary_plot(explainer, force=False):
+    """
+    Get the summary plot (a global interpretation) of the model.
+    """
     if os.path.isfile('static/summary.png') and not force:
         return 'static/summary.png'
     shap_values = get_shap_values(explainer, X, y)
@@ -54,11 +70,17 @@ def get_summary_plot(explainer, force=False):
 
 
 def get_local_explanations(explainer, instance_df, predict_df):
+    """
+    Get local explanations for a specific instance and its prediction.
+    """
     shap_values = get_shap_values(explainer, instance_df, predict_df)
     return get_force_plot(explainer, instance_df, shap_values), get_detail_explanation(instance_df, shap_values)
 
 
 def map_column(column_name: str):
+    """
+    Map column names to human-readable names.
+    """
     if column_name == 'purpose':
         return 'Purpose'
     elif column_name == 'loan_amnt':
@@ -74,6 +96,9 @@ def map_column(column_name: str):
 
 
 def get_detail_explanation(instance_df, shap_values):
+    """
+    Generate a detailed explanation of feature impacts.
+    """
     explanation = ''
     columns = [map_column(column_name) for column_name in instance_df.columns]
     zipped = list(zip(shap_values[0], columns))
@@ -93,6 +118,9 @@ def get_detail_explanation(instance_df, shap_values):
 
 
 def get_force_plot(explainer, instance_df, shap_values):
+    """
+    Generate a SHAP force plot for a specific instance.
+    """
     shap.initjs()
     force_plot = shap.force_plot(explainer.expected_value, shap_values, instance_df,
                                  feature_names=instance_df.columns, matplotlib=False)
